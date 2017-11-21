@@ -2,7 +2,7 @@
   "name": "breakout-api-client",
   "version": "0.0.2",
   "description": "A JS Api client for the breakout-backend",
-  "main": "src/client.js",
+  "main": "src/BreakoutApi.js",
   "directories": {
     "test": "test"
   },
