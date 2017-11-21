@@ -266,6 +266,22 @@ class BreakoutApi {
       .then(resp => resp.data.isLoggedIn);
   }
 
+  /**
+   * Fetch one page of postings
+   *
+   * @param page The page which should be fetched
+   * @return {*|Axios.Promise}
+   */
+  fetchPostings(page = 0) {
+    const options = {
+      params: {
+        page: page
+      }
+    };
+
+    return this.instance.get('/posting/', options).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
