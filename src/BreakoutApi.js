@@ -12,7 +12,7 @@ function validateNotNullOrUndefined(arg) {
 
 class BreakoutApi {
 
-  constructor(url, clientId, clientSecret, debug) {
+  constructor(url, clientId, clientSecret, cloudinaryApiKey = "", debug) {
 
     validateNotNullOrUndefined(url);
     validateNotNullOrUndefined(clientId);
@@ -21,6 +21,9 @@ class BreakoutApi {
     this.url = url;
     this.clientId = clientId;
     this.clientSecret = clientSecret;
+
+    this.cloudinaryApiKey = cloudinaryApiKey;
+
     this.instance = axios.create({
       baseURL: `${url}`
     });
@@ -28,7 +31,7 @@ class BreakoutApi {
     if (debug && debug === true) {
       this.registerDebugInterceptor();
     }
-    
+
   }
 
   static getClientSideUrl() {
@@ -280,6 +283,66 @@ class BreakoutApi {
     };
 
     return this.instance.get('/posting/', options).then(resp => resp.data);
+  }
+
+  signCloudinaryParams(params = {}) {
+
+    const data = params;
+
+    return this.instance.post('/media/signCloudinaryParams/', data).then(resp => resp.data);
+  }
+
+  uploadImage(image, signedParams) {
+    if (global.FormData) {
+      const form = new global.FormData();
+
+      form.append("api_key", this.cloudinaryApiKey);
+      form.append("signature", signedParams.signature);
+      form.append("timestamp", signedParams.timestamp);
+      form.append("file", image);
+
+      console.log(form);
+
+      return axios.post('https://api.cloudinary.com/v1_1/breakout/image/upload', form).then(resp => resp.data);
+    } else {
+      throw new Error("Operation only supported in browser");
+    }
+  }
+
+  fetchChallengesForTeam(teamId) {
+    return this.instance.get(`/team/${teamId}/challenge/`).then(resp => resp.data);
+  }
+
+  uploadPosting(text = null, location = null, media = null) {
+    const data = {
+      date: Date.now() / 1000,
+    };
+
+    if (location) {
+      data.postingLocation = location;
+    }
+
+    if (text) {
+      data.text = text;
+    }
+
+    if (media) {
+      data.media = media;
+    }
+
+    this.instance.post('/posting/', data).then(resp => resp.data);
+  }
+
+  fetchPostingsForTeam(teamId) {
+    return this.instance.get(`/event/-1/team/${teamId}/posting/`).then(resp => resp.data);
+  }
+
+  fullfillChallenge(challengeId, postingId) {
+    const data = {
+      status: 'WITH_PROOF',
+      postingId: postingId
+    };
+    return this.instance.post(`/event/-1/team/-1/challenge/${challengeId}/status/`, data).then(resp => resp.data);
   }
 
 }

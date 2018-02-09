@@ -11,14 +11,14 @@ const clientSecret = "123456789";
 describe('BreakoutApi', () => {
   describe('fetchPostings', () => {
 
-    it('should return an array', async() => {
+    it('should return an array', async () => {
       const api = new BreakoutApi(url, clientId, clientSecret);
       const postings = await api.fetchPostings(2);
 
       expect(postings).to.be.a('array');
     });
 
-    it('should show different results on different pages', async() => {
+    it('should show different results on different pages', async () => {
       const api = new BreakoutApi(url, clientId, clientSecret);
       const firstPage = await api.fetchPostings(0);
       const secondPage = await api.fetchPostings(1);
