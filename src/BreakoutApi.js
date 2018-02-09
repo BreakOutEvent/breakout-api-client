@@ -345,6 +345,11 @@ class BreakoutApi {
     return this.instance.post(`/event/-1/team/-1/challenge/${challengeId}/status/`, data).then(resp => resp.data);
   }
 
+  fetchInvoicesForEvent(eventId) {
+    return this.instance.get(`sponsoringinvoice/${eventId}/`)
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
