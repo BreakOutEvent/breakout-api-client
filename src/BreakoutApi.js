@@ -292,7 +292,7 @@ class BreakoutApi {
     return this.instance.post('/media/signCloudinaryParams/', data).then(resp => resp.data);
   }
 
-  uploadImage(image, signedParams) {
+  uploadImage(image, signedParams, onProgress = () => {}) {
     if (global.FormData) {
       const form = new global.FormData();
 
@@ -301,9 +301,42 @@ class BreakoutApi {
       form.append("timestamp", signedParams.timestamp);
       form.append("file", image);
 
-      console.log(form);
+      // see https://github.com/axios/axios/issues/382
+      const options = {
+        transformRequest: [(data, headers) => {
+          delete headers.common.Authorization;
+          return data
+        }],
+        onUploadProgress: onProgress
+      };
 
-      return axios.post('https://api.cloudinary.com/v1_1/breakout/image/upload', form).then(resp => resp.data);
+      return axios.post('https://api.cloudinary.com/v1_1/breakout/image/upload',form, options).then(resp => resp.data);
+      
+    } else {
+      throw new Error("Operation only supported in browser");
+    }
+  }
+
+  uploadVideo(video, signedParams, onProgress = () => {}) {
+    if (global.FormData) {
+      const form = new global.FormData();
+
+      form.append("api_key", this.cloudinaryApiKey);
+      form.append("signature", signedParams.signature);
+      form.append("timestamp", signedParams.timestamp);
+      form.append("file", video);
+
+      // see https://github.com/axios/axios/issues/382
+      const options = {
+        transformRequest: [(data, headers) => {
+          delete headers.common.Authorization;
+          return data
+        }],
+        onUploadProgress: onProgress
+      };
+
+      return axios.post('https://api.cloudinary.com/v1_1/breakout/video/upload',form, options).then(resp => resp.data);
+
     } else {
       throw new Error("Operation only supported in browser");
     }
