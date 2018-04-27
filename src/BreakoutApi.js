@@ -363,7 +363,7 @@ class BreakoutApi {
       data.media = media;
     }
 
-    this.instance.post('/posting/', data).then(resp => resp.data);
+    return this.instance.post('/posting/', data).then(resp => resp.data);
   }
 
   fetchPostingsForTeam(teamId) {
@@ -380,6 +380,11 @@ class BreakoutApi {
 
   fetchInvoicesForEvent(eventId) {
     return this.instance.get(`sponsoringinvoice/${eventId}/`)
+      .then(resp => resp.data);
+  }
+
+  likePosting(postingId) {
+    return this.instance.post(`posting/${postingId}/like/`, {date: Math.floor(new Date().getTime() / 1000)})
       .then(resp => resp.data);
   }
 
