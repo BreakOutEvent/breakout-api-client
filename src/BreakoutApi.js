@@ -393,6 +393,10 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  fetchChallengesForTeam(teamId) {
+    return this.instance.get(`team/${teamId}/challenge/`)
+      .then(resp => resp.data);
+  }
 }
 
 module.exports = BreakoutApi;
