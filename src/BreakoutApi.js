@@ -12,7 +12,7 @@ function validateNotNullOrUndefined(arg) {
 
 class BreakoutApi {
 
-  constructor(url, clientId, clientSecret, cloudinaryApiKey = "", debug) {
+  constructor(url, clientId, clientSecret, cloudinaryCloud = '', cloudinaryApiKey = '', debug=false) {
 
     validateNotNullOrUndefined(url);
     validateNotNullOrUndefined(clientId);
@@ -21,7 +21,7 @@ class BreakoutApi {
     this.url = url;
     this.clientId = clientId;
     this.clientSecret = clientSecret;
-
+    this.cloudinaryCloud = cloudinaryCloud;
     this.cloudinaryApiKey = cloudinaryApiKey;
 
     this.instance = axios.create({
@@ -285,6 +285,11 @@ class BreakoutApi {
     return this.instance.get('/posting/', options).then(resp => resp.data);
   }
 
+  fetchInvoicesForEvent(eventId) {
+    return this.instance.get(`sponsoringinvoice/${eventId}/`)
+      .then(resp => resp.data);
+  }
+
   signCloudinaryParams(params = {}) {
 
     const data = params;
@@ -317,28 +322,28 @@ class BreakoutApi {
     }
   }
 
-  uploadVideo(video, signedParams, onProgress = () => {}) {
+  uploadImage(image, signedParams, onProgress = () => {}) {
     if (global.FormData) {
       const form = new global.FormData();
 
-      form.append("api_key", this.cloudinaryApiKey);
-      form.append("signature", signedParams.signature);
-      form.append("timestamp", signedParams.timestamp);
-      form.append("file", video);
+      form.append('api_key', this.cloudinaryApiKey);
+      form.append('signature', signedParams.signature);
+      form.append('timestamp', signedParams.timestamp);
+      form.append('file', image.replace(/name=.*;/g, ''));
 
       // see https://github.com/axios/axios/issues/382
       const options = {
         transformRequest: [(data, headers) => {
           delete headers.common.Authorization;
-          return data
+          return data;
         }],
         onUploadProgress: onProgress
       };
 
-      return axios.post('https://api.cloudinary.com/v1_1/breakout/video/upload',form, options).then(resp => resp.data);
-
+      return axios.post(`https://api.cloudinary.com/v1_1/${this.cloudinaryCloud}/image/upload`, form, options)
+        .then(resp => resp.data);
     } else {
-      throw new Error("Operation only supported in browser");
+      throw new Error('Operation only supported in browser');
     }
   }
 
