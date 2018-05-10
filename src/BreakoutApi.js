@@ -351,6 +351,10 @@ class BreakoutApi {
     return this.instance.get(`/team/${teamId}/challenge/`).then(resp => resp.data);
   }
 
+  fetchSponsoringsForTeam(teamId) {
+    return this.instance.get(`/team/${teamId}/sponsoring/`).then(resp => resp.data);
+  }
+
   uploadPosting(text = null, location = null, media = null) {
     const data = {
       date: Date.now() / 1000,
