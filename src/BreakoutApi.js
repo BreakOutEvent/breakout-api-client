@@ -379,6 +379,14 @@ class BreakoutApi {
     return this.instance.get(`/event/-1/team/${teamId}/posting/`).then(resp => resp.data);
   }
 
+  fetchLocationsForEvent(eventId) {
+    return this.instance.get(`/event/${eventId}/location/`).then(resp => resp.data);
+  }
+
+  fetchLocationsForTeam(teamId) {
+    return this.instance.get(`/event/-1/team/${teamId}/location/`).then(resp => resp.data);
+  }
+
   fullfillChallenge(challengeId, postingId) {
     const data = {
       status: 'WITH_PROOF',
