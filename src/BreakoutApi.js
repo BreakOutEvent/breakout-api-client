@@ -383,8 +383,8 @@ class BreakoutApi {
     return this.instance.get(`/event/${eventId}/location/`).then(resp => resp.data);
   }
 
-  fetchLocationsForTeam(teamId) {
-    return this.instance.get(`/event/-1/team/${teamId}/location/`).then(resp => resp.data);
+  fetchLocationsForTeam(teamId, limit = 100) {
+    return this.instance.get(`/event/-1/team/${teamId}/location/?perTeam=${limit}`).then(resp => resp.data);
   }
 
   fullfillChallenge(challengeId, postingId) {
