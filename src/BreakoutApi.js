@@ -392,7 +392,7 @@ class BreakoutApi {
       status: 'WITH_PROOF',
       postingId: postingId
     };
-    return this.instance.post(`/event/-1/team/-1/challenge/${challengeId}/status/`, data).then(resp => resp.data);
+    return this.instance.put(`/event/-1/team/-1/challenge/${challengeId}/status/`, data).then(resp => resp.data);
   }
 
   fetchInvoicesForEvent(eventId) {
