@@ -404,6 +404,11 @@ class BreakoutApi {
     return this.instance.post(`posting/${postingId}/like/`, {date: Math.floor(new Date().getTime() / 1000)})
       .then(resp => resp.data);
   }
+
+  fetchTeamsForEvent(eventId) {
+    return this.instance.get(`event/${eventId}/team/`).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
