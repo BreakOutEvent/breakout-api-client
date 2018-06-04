@@ -409,6 +409,13 @@ class BreakoutApi {
     return this.instance.get(`event/${eventId}/team/`).then(resp => resp.data);
   }
 
+  uploadLocationForTeam(teamId, location) {
+    location.date = location.data || Math.floor(new Date().getTime() / 1000);
+
+    return this.instance.post(`event/-1/team/${teamId}/location/`, location)
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
