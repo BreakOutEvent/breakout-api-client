@@ -395,8 +395,14 @@ class BreakoutApi {
     return this.instance.put(`/event/-1/team/-1/challenge/${challengeId}/status/`, data).then(resp => resp.data);
   }
 
-  fetchInvoicesForEvent(eventId) {
-    return this.instance.get(`sponsoringinvoice/${eventId}/`)
+  fetchInvoicesForEvent(eventId, detailed = false) {
+    const options = {
+      params: {
+        detailed
+      }
+    };
+
+    return this.instance.get(`sponsoringinvoice/${eventId}/`, options)
       .then(resp => resp.data);
   }
 
