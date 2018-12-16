@@ -422,6 +422,11 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  addChallenge(teamId, challenge) {
+    return this.instance.post(`event/-1/team/${teamId}/challenge`, challenge)
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
