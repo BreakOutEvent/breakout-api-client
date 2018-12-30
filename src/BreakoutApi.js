@@ -432,7 +432,7 @@ class BreakoutApi {
   }
 
   checkEmailExistance(email) {
-    return this.instance.get(`user/exists/`, { query: { email } } )
+    return this.instance.get(`user/exists/`, { params: { email } } )
       .then(resp => resp.data);
   }
 
