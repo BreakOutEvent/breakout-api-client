@@ -351,6 +351,10 @@ class BreakoutApi {
     return this.instance.get(`/team/${teamId}/challenge/`).then(resp => resp.data);
   }
 
+  fetchChallengesForTeamAndEvent(teamId) {
+    return this.instance.get(`/event/-1/team/${teamId}/challenge/`).then(resp => resp.data);
+  }
+
   fetchSponsoringsForTeam(teamId) {
     return this.instance.get(`/team/${teamId}/sponsoring/`).then(resp => resp.data);
   }
