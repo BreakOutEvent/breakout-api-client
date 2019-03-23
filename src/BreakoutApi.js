@@ -348,11 +348,11 @@ class BreakoutApi {
   }
 
   fetchChallengesForUser(userId) {
-    return this.instance.get('/user/${userId}/sponsor/challenge/').then(resp => resp.data);
+    return this.instance.get(`/user/${userId}/sponsor/challenge/`).then(resp => resp.data);
   }
 
   fetchSponsoringsForUser(userId) {
-    return this.instance.get('/user/${userId}/sponsor/sponsoring/').then(resp => resp.data);
+    return this.instance.get(`/user/${userId}/sponsor/sponsoring/`).then(resp => resp.data);
   }
 
   fetchChallengesForTeam(teamId) {
