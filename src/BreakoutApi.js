@@ -217,6 +217,14 @@ class BreakoutApi {
     return this.instance.put(`/user/${userId}/`, data).then(resp => resp.data);
   }
 
+  updateUserNotificationToken(userId, data) {
+    return this.instance.put(`/user/${userId}/notificationtoken`, data).then(resp => resp.data);
+  }
+
+  removeUserNotificationToken(userId) {
+    return this.instance.delete(`/user/${userId}/notificationtoken`).then(resp => resp.data);
+  }
+
   async isUserParticipant() {
     const me = await this.getMe();
     if (!me.participant) {
@@ -316,7 +324,7 @@ class BreakoutApi {
       };
 
       return axios.post('https://api.cloudinary.com/v1_1/breakout/image/upload',form, options).then(resp => resp.data);
-      
+
     } else {
       throw new Error("Operation only supported in browser");
     }
