@@ -439,6 +439,11 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  checkEmailExistance(email) {
+    return this.instance.get(`user/exists/`, { params: { email } } )
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
