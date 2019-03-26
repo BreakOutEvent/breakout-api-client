@@ -452,6 +452,10 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  getGroupMessage(groupMessageId) {
+    return this.instance.get(`/messaging/${groupMessageId}/`).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
