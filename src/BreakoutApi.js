@@ -452,6 +452,11 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  addSponsoring(teamId, sponsoring) {
+    return this.instance.post(`event/-1/team/${teamId}/sponsoring/`, sponsoring)
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
