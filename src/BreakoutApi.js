@@ -462,6 +462,11 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  searchUser(searchString) {
+    return this.instance.get(`/user/search/${searchString}/`)
+      .then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
