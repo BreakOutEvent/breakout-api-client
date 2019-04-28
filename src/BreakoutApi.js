@@ -452,6 +452,11 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  createGroupMessage(users) {
+    return this.instance.post(`/messaging/`, users)
+      .then(resp => resp.data);
+  }
+
   getGroupMessage(groupMessageId) {
     return this.instance.get(`/messaging/${groupMessageId}/`)
       .then(resp => resp.data);
