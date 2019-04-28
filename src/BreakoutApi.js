@@ -451,6 +451,10 @@ class BreakoutApi {
     return this.instance.get(`user/exists/`, { params: { email } } )
       .then(resp => resp.data);
   }
+  
+  addSponsoring(teamId, sponsoring) {
+    return this.instance.post(`event/-1/team/${teamId}/sponsoring/`, sponsoring)
+      .then(resp => resp.data);
 
   createGroupMessage(users) {
     return this.instance.post(`/messaging/`, users)
