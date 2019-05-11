@@ -451,9 +451,28 @@ class BreakoutApi {
     return this.instance.get(`user/exists/`, { params: { email } } )
       .then(resp => resp.data);
   }
-
+  
   addSponsoring(teamId, sponsoring) {
     return this.instance.post(`event/-1/team/${teamId}/sponsoring/`, sponsoring)
+      .then(resp => resp.data);
+
+  createGroupMessage(users) {
+    return this.instance.post(`/messaging/`, users)
+      .then(resp => resp.data);
+  }
+
+  getGroupMessage(groupMessageId) {
+    return this.instance.get(`/messaging/${groupMessageId}/`)
+      .then(resp => resp.data);
+  }
+
+  groupMessageAddMessage(groupMessageId, message) {
+    return this.instance.post(`/messaging/${groupMessageId}/message/`, message)
+      .then(resp => resp.data);
+  }
+
+  searchUser(searchString) {
+    return this.instance.get(`/user/search/${searchString}/`)
       .then(resp => resp.data);
   }
 
