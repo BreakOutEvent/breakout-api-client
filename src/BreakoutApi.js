@@ -298,6 +298,12 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  searchInvoices(params) {
+    let formData = qs.stringify(params);
+    return this.instance.get(`sponsoringinvoice/search/?${formData}`)
+      .then(resp => resp.data);
+  }
+
   signCloudinaryParams(params = {}) {
 
     const data = params;
