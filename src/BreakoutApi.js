@@ -483,6 +483,10 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
+  removeUserLogo(userId) {
+    return this.instance.delete(`/user/${userId}/logo`).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
