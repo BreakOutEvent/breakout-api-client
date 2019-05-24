@@ -487,6 +487,10 @@ class BreakoutApi {
     return this.instance.delete(`/user/${userId}/logo`).then(resp => resp.data);
   }
 
+  removeSponsorUrl(userId) {
+    return this.instance.delete(`/user/${userId}/url`).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
