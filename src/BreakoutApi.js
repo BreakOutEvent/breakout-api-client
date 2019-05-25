@@ -161,6 +161,10 @@ class BreakoutApi {
     return this.instance.get('/event/').then(resp => resp.data);
   }
 
+  getAllOpenEvents() {
+    return this.instance.get('/me/event/open/').then(resp => resp.data);
+  }
+
   async getAllInvitations() {
     const events = await this.getAllEvents();
     let invitations = await Promise.all(events.map(event => this.getInvitations(event.id)));
