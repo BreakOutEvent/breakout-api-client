@@ -1,6 +1,6 @@
 {
   "name": "breakout-api-client",
-  "version": "0.16.2",
+  "version": "0.16.3",
   "description": "A JS Api client for the breakout-backend",
   "main": "src/BreakoutApi.js",
   "directories": {
@@ -17,8 +17,8 @@
     "mocha": "^3.1.2"
   },
   "dependencies": {
-    "axios": "^0.17.1",
-    "bluebird": "^3.5.1",
+    "axios": "^0.19.0",
+    "bluebird": "^3.5.5",
     "qs": "^6.5.1",
     "request": "^2.78.0"
   }
