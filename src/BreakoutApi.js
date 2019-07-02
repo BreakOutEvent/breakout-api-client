@@ -461,7 +461,7 @@ class BreakoutApi {
     return this.instance.get(`user/exists/`, { params: { email } } )
       .then(resp => resp.data);
   }
-  
+
   addSponsoring(teamId, sponsoring) {
     return this.instance.post(`event/-1/team/${teamId}/sponsoring/`, sponsoring)
       .then(resp => resp.data);
@@ -493,6 +493,16 @@ class BreakoutApi {
 
   removeSponsorUrl(userId) {
     return this.instance.delete(`/user/${userId}/url`).then(resp => resp.data);
+  }
+
+  addPayment(invoiceId, amount, fidorId) {
+    const body = {
+      amount: amount,
+      fidorId: fidorId,
+      date: Math.round(new Date().getTime() / 1000)
+    };
+    return this.instance.post(`invoice/${invoiceId}/payment/`, body)
+      .then(resp => resp.data);
   }
 
 }
