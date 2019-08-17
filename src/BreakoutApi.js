@@ -517,6 +517,10 @@ class BreakoutApi {
     return this.instance.post(`/admin/user/${userId}/swappasswords/`).then(resp => resp.data);
   }
 
+  deleteAccount(userId) {
+    return this.instance.delete(`/user/${userId}/`).then(resp => resp.data);
+  }
+
   cloneSettings(debug=false) {
     return new BreakoutApi(this.url, this.clientId, this.clientSecret, this.cloudinaryCloud, this.cloudinaryApiKey, debug);
   }
