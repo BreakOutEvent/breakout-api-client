@@ -525,6 +525,14 @@ class BreakoutApi {
     return new BreakoutApi(this.url, this.clientId, this.clientSecret, this.cloudinaryCloud, this.cloudinaryApiKey, debug);
   }
 
+  eventAddEmailWhitelist(eventId, email) {
+    return this.instance.post(`/event/${eventId}/whitelistMail/`, {email: email}).then(resp => resp.data);
+  }
+
+  eventAddDomainWhitelist(eventId, domain) {
+    return this.instance.post(`/event/${eventId}/whitelistDomain/`, {domain: domain}).then(resp => resp.data);
+  }
+
 }
 
 module.exports = BreakoutApi;
