@@ -505,12 +505,12 @@ class BreakoutApi {
       .then(resp => resp.data);
   }
 
-  makeAdmin(userId) {
-    return this.instance.post(`/admin/user/${userId}/admin/`).then(resp => resp.data);
+  makeAdmin(userId, authority) {
+    return this.instance.post(`/admin/user/${userId}/admin/?authority=${authority}`).then(resp => resp.data);
   }
 
-  removeAdmin(userId) {
-    return this.instance.delete(`/admin/user/${userId}/admin/`).then(resp => resp.data);
+  removeAdmin(userId, authority) {
+    return this.instance.delete(`/admin/user/${userId}/admin/?authority=${authority}`).then(resp => resp.data);
   }
 
   swapPasswords(userId) {
