@@ -175,7 +175,10 @@ class BreakoutApi {
     const teams = await Promise.all(invitations.map(invite => this.getTeamById(invite.team)));
 
     return invitations.map(invitation => {
-      invitation.team = teams.filter(team => (team.id === invitation.team))[0];
+      const team = teams.filter(team => (team.id === invitation.team))[0];
+      const event = events.filter(event => event.id === team.event)[0];
+      invitation.team = team
+      invitation.current = event.current;
       return invitation;
     });
   }
@@ -531,6 +534,14 @@ class BreakoutApi {
 
   eventAddDomainWhitelist(eventId, domain) {
     return this.instance.post(`/event/${eventId}/whitelistDomain/`, {domain: domain}).then(resp => resp.data);
+  }
+
+  createEvent(event) {
+    return this.instance.post('/event/', event).then(resp => resp.data);
+  }
+
+  updateEvent(event) {
+    return this.instance.put(`/event/${event.id}/`, event).then(resp => resp.data);
   }
 
 }
