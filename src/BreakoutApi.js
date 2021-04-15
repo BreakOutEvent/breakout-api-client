@@ -114,10 +114,11 @@ class BreakoutApi {
     this.instance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`;
   }
 
-  createAccount(email, password) {
+  createAccount(email, password, newsletter=false) {
     return this.instance.post('/user/', {
-      email: email,
-      password: password
+      email,
+      password,
+      newsletter,
     }).then(resp => resp.data);
   }
 
