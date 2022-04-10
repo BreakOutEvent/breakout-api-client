@@ -525,6 +525,10 @@ class BreakoutApi {
     return this.instance.delete(`/user/${userId}/`).then(resp => resp.data);
   }
 
+  deleteTeam(teamId) {
+    return this.instance.delete(`/team/${teamId}/`).then(resp => resp.data);
+  }
+
   cloneSettings(debug=false) {
     return new BreakoutApi(this.url, this.clientId, this.clientSecret, this.cloudinaryCloud, this.cloudinaryApiKey, debug);
   }
