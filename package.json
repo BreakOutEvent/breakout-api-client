@@ -1,6 +1,6 @@
 {
   "name": "breakout-api-client",
-  "version": "0.18.4",
+  "version": "0.18.6",
   "description": "A JS Api client for the breakout-backend",
   "main": "src/BreakoutApi.js",
   "directories": {
